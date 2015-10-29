@@ -1,17 +1,33 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+<?php
+/*
+* Auteur : Lucien Camuglia  
+* Date   : 29.10.2015
+* Version: 1.0 LC Version de base
+* Description : Fichier contenant les requêtes de la BDD
+*/
+
+
+/**
+ * Connexion à la base de données
+ * @staticvar PDO $pdo  objet de connexion
+ * @return PDO  connexion à la base
+ */
+function connexionDb() {
+    //variables contenant les informations de connexion ainsi que la DB
+    $serveur = '';
+    $pseudo = '';
+    $pwd = '';
+    $db = '';
+
+    static $pdo = null;
+
+    if ($pdo === NULL) {
+        // Connexion à la base.
+        $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+        $pdo = new PDO("mysql:host=$serveur;dbname=$db", $pseudo, $pwd, $pdo_options);
+        $pdo->exec("Set Character set UTF8");
+    }
+    return $pdo;
+}
+
+$pdo = connexionDb();
