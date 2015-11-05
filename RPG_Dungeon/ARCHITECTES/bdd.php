@@ -1,12 +1,13 @@
 <?php
+
 /*
-* Auteur : Lucien Camuglia  
-* Date   : 29.10.2015
-* Version: 1.0 LC Version de base
-* Description : Fichier contenant les requêtes de la BDD
+ * Auteur : Lucien Camuglia  
+ * Date   : 29.10.2015
+ * Version: 1.0 LC Version de base
+ * Description : Fichier contenant les requêtes de la BDD
 * Modification : 
 *               + 05.11.2015 AD Ajout de la fonction pour récupérer le donjon
-*/
+ */
 
 
 /**
@@ -18,7 +19,7 @@ function connexionDb() {
     //variables contenant les informations de connexion ainsi que la DB
     $serveur = '127.0.0.1';
     $pseudo = 'root';
-    $pwd = '';
+    $pwd = 'Super456';
     $db = 'rpg_donjon';
 
     static $pdo = null;
@@ -26,6 +27,8 @@ function connexionDb() {
     if ($pdo === NULL) {
         // Connexion à la base.
         $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+
+
         $pdo = new PDO("mysql:host=$serveur;dbname=$db", $pseudo, $pwd, $pdo_options);
         $pdo->exec("Set Character set UTF8");
     }
@@ -52,7 +55,7 @@ Function PrepareExecute($query, $params = NULL) {
 
 /* ***************************************************************************
  *                                 PERSONNAGES                               *
- *****************************************************************************/
+ * *************************************************************************** */
 
 /* ***************************************************************************
  *                                  TEXTURES                                 *
@@ -67,7 +70,7 @@ function RecupererCheminImage($nom)
 }
 /* ***************************************************************************
  *                                   DONJON                                  *
- *****************************************************************************/
+ * *************************************************************************** */
 
 /**
  * Récupère le donjon dans la base de données
@@ -83,6 +86,35 @@ function RecupereDonjonDB(){
     return $st;
 }
 
+/**
+ * Mise à jour du donjon
+ * @global pdo $pdo
+ * @param array $carte Tableau de la carte a sauver 
+ */
+function MajDonjon($carte) {
+    global $pdo;
+    $indice1 = 0;
+    EffaceDonjon();
+    foreach ($carte as $ligne) {
+        $indice2 = 0;
+        foreach ($ligne as $case) {
+
+            $query = "INSERT INTO plateformes(x, y, Direction, idReference) VALUES (:indice1,:indice2,:direction,:ref)";
+            $params = array("indice1" => $indice1, "indice2" => $indice2,"direction"=>NULL, ":ref" => $case + 1);
+            PrepareExecute($query, $params);
+            $indice2++;
+        }
+        $indice1++;
+    }
+}
+
+/**
+ * Vide le donjon de la BDD
+ */
+function EffaceDonjon() {
+    $query = "DELETE FROM plateformes";
+    PrepareExecute($query);
+}
 
 /* ***************************************************************************
  *                                 DEPLACEMENT                               *
