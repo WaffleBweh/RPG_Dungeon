@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `rpg_donjon`
 --
-
+CREATE DATABASE IF NOT EXISTS "RPG_DONJON"
 -- --------------------------------------------------------
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `plateformes` (
   `idReference` int(11) NOT NULL,
   PRIMARY KEY (`x`,`y`),
   KEY `idReference` (`idReference`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `plateformes`
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `references` (
   `idTexture` int(11) NOT NULL,
   PRIMARY KEY (`idReference`),
   KEY `idTexture` (`idTexture`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `references`
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `textures` (
   `Nom` varchar(100) NOT NULL,
   `Chemin` varchar(200) NOT NULL,
   PRIMARY KEY (`idTexture`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
