@@ -22,7 +22,7 @@
                     Ce jeu a été crée par des étudiants techniciens de l'école d'informatique au CFPT. </br>
                     Le but est de réaliser un jeu de donjon en fausse 3D dans une page Web en utilisant une base de données,
                     un serveur PHP et un script d’affichage en JS
-                    </br></br><a href='index.php'><-Retour</a>
+                    </br></br><a href="index.php" class="btn btn-block btn-lg btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
                 </div>
                 
             </div>

@@ -26,10 +26,8 @@
                     <b>Chef Architecte:</b> Jordan <br/>
                     <b>Architectes:</b> Lucien, Alan, Jordan, Julien F. et Stieban</br></br>
                     <b>Chef des Codeurs:</b> Robin <br/>
-                    <b>Codeurs:</b> Robin, Kévin, Cédric et Dylan
-                    
-                    
-                    </br></br><a href='index.php'><-Retour</a>
+                    <b>Codeurs:</b> Robin, Kévin, Cédric et Dylan                  
+                    </br></br><a href="index.php" class="btn btn-block btn-lg btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
                 </div>
                 
             </div>
