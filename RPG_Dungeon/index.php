@@ -9,9 +9,12 @@
 
     </head>
     <body>
+        <header class="container page-header">
+            <img class="img-responsive col-sm-10 col-sm-offset-1" src="./IMG/logo dungeon.png">
+        </header>
         <section>
             <div class="container contenu">
-
+                
                 <div class="modal-header col-sm-6 col-sm-offset-3">
                     <h1 class="text-center">Maquette</h1>
                 </div>
