@@ -21,7 +21,7 @@
                 <div class="modal-body col-sm-6 col-sm-offset-3">
                     <ul id="lsMenu" class="nav nav-pills nav-stacked">
                         <li>
-                            <a href="#">Jouer</a>
+                            <a href="jouer.php">Jouer</a>
                         </li>
                         <li>
                             <a href="#">Information</a>
