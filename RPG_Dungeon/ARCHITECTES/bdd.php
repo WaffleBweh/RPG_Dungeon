@@ -4,6 +4,8 @@
 * Date   : 29.10.2015
 * Version: 1.0 LC Version de base
 * Description : Fichier contenant les requêtes de la BDD
+* Modification : 
+*               + 05.11.2015 AD Ajout de la fonction pour récupérer le donjon
 */
 
 
@@ -14,10 +16,10 @@
  */
 function connexionDb() {
     //variables contenant les informations de connexion ainsi que la DB
-    $serveur = '';
-    $pseudo = '';
+    $serveur = '127.0.0.1';
+    $pseudo = 'root';
     $pwd = '';
-    $db = '';
+    $db = 'rpg_donjon';
 
     static $pdo = null;
 
@@ -64,8 +66,22 @@ function RecupererCheminImage($nom)
     return $st;
 }
 /* ***************************************************************************
- *                                   DONGEON                                 *
+ *                                   DONJON                                  *
  *****************************************************************************/
+
+/**
+ * Récupère le donjon dans la base de données
+ * @global pdo $pdo
+ * @return array Tableau des éléments récupérer dans la bdd
+ */
+function RecupereDonjonDB(){
+    global $pdo;
+    
+    $query = "SELECT x, y, idReference FROM plateformes ORDER BY x, y";
+    $st = PrepareExecute($query)->FetchAll();
+    
+    return $st;
+}
 
 
 /* ***************************************************************************
