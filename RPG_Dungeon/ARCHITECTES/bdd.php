@@ -86,6 +86,11 @@ function RecupereDonjonDB(){
     return $st;
 }
 
+/**
+ * Mise à jour du donjon
+ * @global pdo $pdo
+ * @param array $carte Tableau de la carte a sauver 
+ */
 function MajDonjon($carte) {
     global $pdo;
     $indice1 = 0;
@@ -103,6 +108,9 @@ function MajDonjon($carte) {
     }
 }
 
+/**
+ * Vide le donjon de la BDD
+ */
 function EffaceDonjon() {
     $query = "DELETE FROM plateformes";
     PrepareExecute($query);
