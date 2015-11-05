@@ -1,17 +1,33 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<!doctype html>
+<html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title></title>
+
+        <meta charset="utf-8">
+        <title>Maquette</title>
+        <link href="script/css/bootstrap.min.css" rel="stylesheet">
+        <link href="script/css/style.css" rel="stylesheet">
+
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+        <section>
+            <div class="container contenu">
+
+                <div class="modal-header col-sm-6 col-sm-offset-3">
+                    <h1 class="text-center">Maquette</h1>
+                </div>
+                <div class="modal-body col-sm-6 col-sm-offset-3">
+
+                    
+                </div>
+            </div>
+        </section>
+
+        <footer class="container">
+            <p class="navbar-text">
+               Technicien Informatique ES 2015 T.IS-E1AB 
+            </p>
+        </footer>
     </body>
 </html>
+
+
