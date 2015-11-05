@@ -62,7 +62,7 @@ function RecupererCheminImage($nom)
     global $pdo;
     $query = "SELECT Chemin FROM textures WHERE Nom = :Nom";
     $params = array('Nom' => $nom);
-    $st = PrepareExecute($query,$params);
+    $st = PrepareExecute($query,$params)->FetchAll();
     return $st;
 }
 /* ***************************************************************************
