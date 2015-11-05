@@ -16,7 +16,7 @@
             <div class="container contenu">
 
                 <div class="modal-header col-sm-6 col-sm-offset-3">
-                    <h1 class="text-center">Maquette</h1>
+                    <h1 class="text-center">Jouer</h1>
                 </div>
                 <div class="modal-body col-sm-6 col-sm-offset-3">
                     <a  href=""><img src="./IMG/NORDOUEST.jpg"></a>

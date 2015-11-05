@@ -24,10 +24,10 @@
                             <a href="jouer.php">Jouer</a>
                         </li>
                         <li>
-                            <a href="#">Informations</a>
+                            <a href="informations.php">Informations</a>
                         </li>
                         <li>
-                            <a href="#">Crédits</a>
+                            <a href="credits.php">Crédits</a>
                         </li>
                     </ul>
                 </div>
