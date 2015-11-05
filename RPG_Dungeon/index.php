@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8">
-        <title>Maquette</title>
+        <title>Dungeons Tech's - Menu</title>
         <link href="script/css/bootstrap.min.css" rel="stylesheet">
         <link href="script/css/style.css" rel="stylesheet">
 
@@ -16,11 +16,20 @@
             <div class="container contenu">
                 
                 <div class="modal-header col-sm-6 col-sm-offset-3">
-                    <h1 class="text-center">Maquette</h1>
+                    <h2 class="text-center">Menu</h2>
                 </div>
                 <div class="modal-body col-sm-6 col-sm-offset-3">
-
-                    
+                    <ul id="lsMenu" class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="#">Jouer</a>
+                        </li>
+                        <li>
+                            <a href="#">Information</a>
+                        </li>
+                        <li>
+                            <a href="#">Crédit</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
