@@ -26,8 +26,9 @@ footer {
 }
 
 .contenu {
-    box-shadow: 10px 10px 30px darkred;
-    border-radius: 5px;
+    //box-shadow: 10px 10px 30px #FF6961;
+    //border-radius: 5px;
+    border: 1px solid white;
     padding-bottom: 10px;
     margin-bottom: 30px;
 }
