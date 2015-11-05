@@ -31,3 +31,18 @@ function connexionDb() {
 }
 
 $pdo = connexionDb();
+
+/**
+ * Prépare et éxécute une requête
+ * @param string $query requête a ééxécuter
+ * @param tableau $params  éventuel paramètre pour la requête
+ * @return PDOStatement
+ */
+Function PrepareExecute($query, $params = NULL) {
+    global $pdo;
+// Préparation de la requête SQL.
+    $st = $pdo->prepare($query);
+// Execution de la requête SQL.
+    $st->execute($params);
+    return $st;
+}
