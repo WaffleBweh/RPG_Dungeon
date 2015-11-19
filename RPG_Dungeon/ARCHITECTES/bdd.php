@@ -93,8 +93,8 @@ function RecupereDonjonDB(){
  */
 function MajDonjon($carte) {
     global $pdo;
-    $indice1 = 0;
-    EffaceDonjon();
+    $indice1 = 0;    
+    EffaceDonjon();    
     foreach ($carte as $ligne) {
         $indice2 = 0;
         foreach ($ligne as $case) {

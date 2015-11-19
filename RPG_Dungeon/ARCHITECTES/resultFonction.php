@@ -1,6 +1,7 @@
 <?php
 
 include './bdd.php';
+include './traitement.php';
 
 $carte =  [
         [1,1,1,1,1,1],
@@ -12,3 +13,6 @@ $carte =  [
 
 MajDonjon($carte);
 
+$carte = RecupereDonjon();
+
+print_r($carte);
