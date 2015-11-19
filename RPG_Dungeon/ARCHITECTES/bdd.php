@@ -75,6 +75,22 @@ function ConnectJoueurDB($pseudo, $mdp) {
 /**
  * Récupère la position x et y du joueur
  * @global pdo $pdo
+ * @param int $idJoueur Id du joueur
+ * @return Array tableau des position du joueur
+ */
+function RecuperePositionDB($idJoueur) {
+    global $pdo;
+    
+    $query = "SELECT posX, posY FROM utilisateurs WHERE idUtilisateur = :id";
+    $params = array('id' => $idJoueur);
+    $st = PrepareExecute($query, $params)->Fetch();
+    
+    return $st;
+}
+
+/**
+ * Inscrit un joueur dans la BDD
+ * @global pdo $pdo
  * @param string $pseudo pseudo de l'utilisateur
  * @param string $mdp mot de passe de l'utilisateur
  * @return string soit une erreur soit l'id de l'utilisateur inscrit
