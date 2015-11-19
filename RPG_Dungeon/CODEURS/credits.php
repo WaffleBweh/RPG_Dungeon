@@ -22,9 +22,9 @@
                     <h3><b>Réalisé par:</b></h3>
                     <b>Chef projet:</b> Julien S.<br/><br/>
                     <b>Chef Graphiste:</b> Valérian<br/>
-                    <b>Graphistes:</b> Valérian, Loris, Xavier et Cyril<br/><br/>
+                    <b>Graphistes:</b> Valérian, Loris, Xavier, Cyril et Stieban<br/><br/>
                     <b>Chef Architecte:</b> Jordan <br/>
-                    <b>Architectes:</b> Lucien, Alan, Jordan, Julien F. et Stieban</br></br>
+                    <b>Architectes:</b> Lucien, Alan, Jordan et Julien F.</br></br>
                     <b>Chef des Codeurs:</b> Robin <br/>
                     <b>Codeurs:</b> Robin, Kévin, Cédric et Dylan                  
                     </br></br><a href="index.php" class="btn btn-block btn-lg btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
