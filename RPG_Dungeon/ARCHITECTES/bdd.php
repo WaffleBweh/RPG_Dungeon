@@ -18,7 +18,7 @@ function connexionDb() {
     //variables contenant les informations de connexion ainsi que la DB
     $serveur = '127.0.0.1';
     $pseudo = 'root';
-    $pwd = '';
+    $pwd = 'Super456';
     $db = 'rpg_donjon';
 
     static $pdo = null;
@@ -75,34 +75,43 @@ function ConnectJoueurDB($pseudo, $mdp) {
 /**
  * Récupère la position x et y du joueur
  * @global pdo $pdo
- * @param int $idJoueur Id du joueur
- * @return Array tableau des position du joueur
+ * @param string $pseudo pseudo de l'utilisateur
+ * @param string $mdp mot de passe de l'utilisateur
+ * @return string soit une erreur soit l'id de l'utilisateur inscrit
  */
-function RecuperePositionDB($idJoueur) {
+function InscriptionJoueurDB($pseudo,$mdp){
     global $pdo;
     
-    $query = "SELECT posX, posY FROM utilisateurs WHERE idUtilisateur = :id";
-    $params = array('id' => $idJoueur);
-    $st = PrepareExecute($query, $params)->Fetch();
+    if(JoueurExistant($pseudo)){
+        return 'error';
+    }else{
+        $query = "INSERT INTO `utilisateurs`(pseudo, mdp) VALUES (:pseudo,:mdp);";
+        $params= array('pseudo'=>$pseudo, 'mdp'=>$mdp);
+        PrepareExecute($query, $params);
+        return $pdo->lastInsertId();
+    }
     
-    return $st;
 }
 
 /**
- * Modifie la position du joueur
+ * Test si un joueur existe dans la bdd
  * @global pdo $pdo
- * @param int $idJoueur Id du joueur
- * @param int $posX Nouvelle position X
- * @param int $posY Nouvelle position Y
- * @return boolean True si réussi
+ * @param string $pseudo pseudo a tester
+ * @return boolean vrai ou faux
  */
-function ModifierPositionDB($idJoueur, $posX, $posY){
-    global$pdo;
+function JoueurExistant($pseudo){
+    global $pdo;
     
-    $query = "UPDATE utilisateurs SET posX=:x, posY=:y WHERE idUtilisateur=:id";
-    $params = array('x' => $posX, 'y' => $posY, 'id' => $idJoueur);
-    $st = PrepareExecute($query, $params);
-    return true;
+    $query = "SELECT pseudo FROM utilisateurs WHERE pseudo=:pseudo;";
+    $params = array('pseudo'=>$pseudo);
+    $st = PrepareExecute($query,$params)->Fetch();
+    
+    if($st==''){
+        return false;
+    }else{
+        return true;
+    }
+    
 }
 
 /* * **************************************************************************

@@ -16,14 +16,29 @@ include './traitement.php';
 
   print_r($carte); */
 
-if (isset($_POST["pseudo"]) && isset($_POST["mdp"])) {
-    $connect = ConnectJoueur($_POST["pseudo"], $_POST["mdp"]);
+if (isset($_POST["pseudo"]) && isset($_POST["mdp"])&& isset($_POST['Confirm_mdp'])) {
+    $pseudo = $_POST["pseudo"];
+    $mdp = sha1($_POST["mdp"]);
+    $confirm = sha1($_POST['Confirm_mdp']);
+    if($mdp == $confirm){
+        $resultat  = InscriptionJoueurDB($pseudo, $mdp);
+        if($resultat=='error'){
+            echo 'le joueur existe déja';            
+        }else{
+            echo "felicitation vous êtes inscrit !<br/>";
+            echo $resultat;
+        }
+    }else{
+        echo "Les mots de passe ne correspondent pas !";
+    }
+    
+   /* $connect = ConnectJoueur($_POST["pseudo"], sha1($_POST["mdp"]));
 
     if ($connect != 'erreur') {
         echo 'Pseudo : ' . $connect["pseudo"] . ' <br />PosX : ' . $connect["posX"] . ' <br />PosY : ' . $connect["posY"];
     } else {
         echo 'Erreur';
-    }
+    }*/
 }
 
 if (isset($_POST["posX"]) && isset($_POST["posY"])){
@@ -53,6 +68,8 @@ and open the template in the editor.
             <label>Mdp</label>
             <input type="password" name="mdp" />
             <br />
+            <label>Confirmation du Mdp</label>
+            <input type="password" name="Confirm_mdp" />
             <input type="submit" name="submit" />
         </form>
         <br />
