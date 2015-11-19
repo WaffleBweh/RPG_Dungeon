@@ -5,10 +5,9 @@
  * Date   : 29.10.2015
  * Version: 1.0 LC Version de base
  * Description : Fichier contenant les requêtes de la BDD
-* Modification : 
-*               + 05.11.2015 AD Ajout de la fonction pour récupérer le donjon
+ * Modification : 
+ *               + 05.11.2015 AD Ajout de la fonction pour récupérer le donjon
  */
-
 
 /**
  * Connexion à la base de données
@@ -19,7 +18,7 @@ function connexionDb() {
     //variables contenant les informations de connexion ainsi que la DB
     $serveur = '127.0.0.1';
     $pseudo = 'root';
-    $pwd = 'Super456';
+    $pwd = '';
     $db = 'rpg_donjon';
 
     static $pdo = null;
@@ -52,23 +51,40 @@ Function PrepareExecute($query, $params = NULL) {
     return $st;
 }
 
-
-/* ***************************************************************************
+/* * **************************************************************************
  *                                 PERSONNAGES                               *
  * *************************************************************************** */
 
-/* ***************************************************************************
+/**
+ * Connecte un joueur
+ * @global pdo $pdo
+ * @param type $pseudo Pseudo du joueur à vérifier
+ * @param type $mdp Mot de passe du joueur
+ * @return array Tableau associatif concernant le joueur
+ */
+function ConnectJoueurDB($pseudo, $mdp) {
+    global $pdo;
+    
+    $query = "SELECT * FROM utilisateurs WHERE pseudo=:pseudo AND mdp=:mdp";
+    $params = array('pseudo' => $pseudo, 'mdp' => $mdp);
+    $st = PrepareExecute($query, $params)->Fetch();
+    
+    return $st;
+}
+
+/* * **************************************************************************
  *                                  TEXTURES                                 *
- *****************************************************************************/
-function RecupererCheminImage($nom)
-{
+ * *************************************************************************** */
+
+function RecupererCheminImage($nom) {
     global $pdo;
     $query = "SELECT Chemin FROM textures WHERE Nom = :Nom";
     $params = array('Nom' => $nom);
-    $st = PrepareExecute($query,$params)->FetchAll();
+    $st = PrepareExecute($query, $params)->FetchAll();
     return $st;
 }
-/* ***************************************************************************
+
+/* * **************************************************************************
  *                                   DONJON                                  *
  * *************************************************************************** */
 
@@ -77,12 +93,12 @@ function RecupererCheminImage($nom)
  * @global pdo $pdo
  * @return array Tableau des éléments récupérer dans la bdd
  */
-function RecupereDonjonDB(){
+function RecupereDonjonDB() {
     global $pdo;
-    
+
     $query = "SELECT x, y, idReference FROM plateformes ORDER BY x, y";
     $st = PrepareExecute($query)->FetchAll();
-    
+
     return $st;
 }
 
@@ -93,14 +109,14 @@ function RecupereDonjonDB(){
  */
 function MajDonjon($carte) {
     global $pdo;
-    $indice1 = 0;    
-    EffaceDonjon();    
+    $indice1 = 0;
+    EffaceDonjon();
     foreach ($carte as $ligne) {
         $indice2 = 0;
         foreach ($ligne as $case) {
 
             $query = "INSERT INTO plateformes(x, y, Direction, idReference) VALUES (:indice1,:indice2,:direction,:ref)";
-            $params = array("indice1" => $indice1, "indice2" => $indice2,"direction"=>NULL, ":ref" => $case + 1);
+            $params = array("indice1" => $indice1, "indice2" => $indice2, "direction" => NULL, ":ref" => $case + 1);
             PrepareExecute($query, $params);
             $indice2++;
         }
