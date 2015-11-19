@@ -18,7 +18,7 @@ function RecupereDonjon() {
     $carte = Array();
     $idPrecedent = null;
 
-    // Parcours tout le donjon
+// Parcours tout le donjon
     foreach ($donjon as $case) {
         if ($idPrecedent != $case["x"]) // Test s'il faut ajouter un nouvelle axe y 
             $carte[] = Array();
@@ -37,13 +37,29 @@ function RecupereDonjon() {
  * @return string/array Si utilisateur trouver, renvoie les données de l'utilisateur sinon le message erreur est renvoyé
  */
 function ConnectJoueur($pseudo, $mdp) {
-    if (!empty($pseudo) && !empty($mdp)){
+    if (!empty($pseudo) && !empty($mdp)) {
         $joueur = ConnectJoueurDB($pseudo, $mdp);
-        
+
         if ($joueur != '')
             return $joueur;
         else
             return 'erreur';
-        
     }
+}
+
+/**
+ * Récupère la position du joueur en X et Y
+ * @param int $idJoueur Id du joueur
+ * @return Array Tableau associatif ("X", "Y") de la position du joueur. Le tableau vaut -1 en x et y si aucun joueur n'est passer en paramètre
+ */
+function RecuperePosition($idJoueur) {
+    $pos = Array("X" => -1, "Y" => -1);
+    
+    if (!empty($idJoueur)) {
+        $position = RecuperePositionDB($idJoueur);
+        $pos["X"] = $position["posX"];
+        $pos["Y"] = $position["posY"];
+    }
+    
+    return $pos;
 }

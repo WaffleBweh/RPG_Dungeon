@@ -64,9 +64,25 @@ Function PrepareExecute($query, $params = NULL) {
  */
 function ConnectJoueurDB($pseudo, $mdp) {
     global $pdo;
-    
+
     $query = "SELECT * FROM utilisateurs WHERE pseudo=:pseudo AND mdp=:mdp";
     $params = array('pseudo' => $pseudo, 'mdp' => $mdp);
+    $st = PrepareExecute($query, $params)->Fetch();
+
+    return $st;
+}
+
+/**
+ * Récupère la position x et y du joueur
+ * @global pdo $pdo
+ * @param int $idJoueur Id du joueur
+ * @return Array tableau des position du joueur
+ */
+function RecuperePositionDB($idJoueur) {
+    global $pdo;
+    
+    $query = "SELECT posX, posY FROM utilisateurs WHERE idUtilisateur = :id";
+    $params = array('id' => $idJoueur);
     $st = PrepareExecute($query, $params)->Fetch();
     
     return $st;

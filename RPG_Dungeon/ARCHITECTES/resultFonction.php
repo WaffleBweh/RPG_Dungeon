@@ -25,6 +25,8 @@ if (isset($_POST["pseudo"]) && isset($_POST["mdp"])) {
         echo 'Erreur';
     }
 }
+
+    $pos = RecuperePosition(1);
 ?>
 
 <!DOCTYPE html>
@@ -47,5 +49,9 @@ and open the template in the editor.
             <input type="password" name="mdp" />
             <input type="submit" name="submit" />
         </form>
+        <br />
+        <label>Position X : <?php echo $pos["X"]; ?></label><br />
+        <label>Position Y : <?php echo $pos["Y"]; ?></label>
+        
     </body>
 </html>
