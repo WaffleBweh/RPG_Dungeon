@@ -88,6 +88,23 @@ function RecuperePositionDB($idJoueur) {
     return $st;
 }
 
+/**
+ * Modifie la position du joueur
+ * @global pdo $pdo
+ * @param int $idJoueur Id du joueur
+ * @param int $posX Nouvelle position X
+ * @param int $posY Nouvelle position Y
+ * @return boolean True si réussi
+ */
+function ModifierPositionDB($idJoueur, $posX, $posY){
+    global$pdo;
+    
+    $query = "UPDATE utilisateurs SET posX=:x, posY=:y WHERE idUtilisateur=:id";
+    $params = array('x' => $posX, 'y' => $posY, 'id' => $idJoueur);
+    $st = PrepareExecute($query, $params);
+    return true;
+}
+
 /* * **************************************************************************
  *                                  TEXTURES                                 *
  * *************************************************************************** */

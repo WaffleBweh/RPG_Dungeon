@@ -63,3 +63,13 @@ function RecuperePosition($idJoueur) {
     
     return $pos;
 }
+
+/**
+ * Modifie la position du joueur
+ * @param int $idJoueur Id du joueur
+ * @param int $posX Nouvelle position X du joueur
+ * @param int $posY Nouvelle position Y du joueur
+ */
+function ModifierPosition($idJoueur, $posX, $posY){
+    ModifierPositionDB($idJoueur, $posX, $posY);
+}

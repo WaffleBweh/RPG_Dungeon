@@ -26,7 +26,11 @@ if (isset($_POST["pseudo"]) && isset($_POST["mdp"])) {
     }
 }
 
-    $pos = RecuperePosition(1);
+if (isset($_POST["posX"]) && isset($_POST["posY"])){
+    ModifierPosition(1, $_POST["posX"], $_POST["posY"]);
+}
+
+$pos = RecuperePosition(1);
 ?>
 
 <!DOCTYPE html>
@@ -45,13 +49,26 @@ and open the template in the editor.
         <form method="Post" action="resultFonction.php">
             <label>Pseudo</label>
             <input type="text" name="pseudo" id="pseudo"/>
+            <br />
             <label>Mdp</label>
             <input type="password" name="mdp" />
+            <br />
             <input type="submit" name="submit" />
         </form>
         <br />
-        <label>Position X : <?php echo $pos["X"]; ?></label><br />
+        <form method="Post" action="resultFonction.php">
+            <label>Position X : </label>
+            <input type="text" name="posX" />
+            <br />
+            <label>Position Y : </label>
+            <input type="text" name="posY" />
+            <br />
+            <input type="submit" name="submit" />
+        </form>
+        <br/>
+        <label>Position X : <?php echo $pos["X"]; ?></label>
+        <br />
         <label>Position Y : <?php echo $pos["Y"]; ?></label>
-        
+
     </body>
 </html>
