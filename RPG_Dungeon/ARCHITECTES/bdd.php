@@ -18,7 +18,7 @@ function connexionDb() {
     //variables contenant les informations de connexion ainsi que la DB
     $serveur = '127.0.0.1';
     $pseudo = 'root';
-    $pwd = 'Super456';
+    $pwd = '';
     $db = 'rpg_donjon';
 
     static $pdo = null;

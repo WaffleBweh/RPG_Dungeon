@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `rpg_donjon`
 --
-CREATE DATABASE IF NOT EXISTS `rpg_donjon` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `rpg_donjon`;
 
 -- --------------------------------------------------------

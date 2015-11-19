@@ -1,3 +1,8 @@
+<?php
+session_start();
+include('../ARCHITECTES/bdd.php');
+include('../ARCHITECTES/traitement.php');
+?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -14,12 +19,34 @@
         </header>
         <section>
             <div class="container contenu">
-                
+
                 <div class="modal-header col-sm-6 col-sm-offset-3">
                     <h2 class="text-center">Menu</h2>
                 </div>
                 <div class="modal-body col-sm-6 col-sm-offset-3">
                     <ul id="lsMenu" class="nav nav-pills nav-stacked">
+                        <?php
+                        /* si le membre est connecte */
+                        if (isset($_SESSION['idUtilisateur'])) {
+                            if ($_SESSION['idUtilisateur'] != "" || $_SESSION['Pseudo'] != "") {
+                                ?>
+                                <li>
+                                    <a href="deconnexion.php">Déconnexion</a>
+                                </li>
+                                <?php
+                            }
+                        } else {
+                            ?>
+                            <li>
+                                <a href="connexion.php">Connexion</a>
+                            </li>
+                            <li>
+                                <a href="inscription.php">Inscription</a>
+                            </li>
+
+                            <?php
+                        }
+                        ?>
                         <li>
                             <a href="jouer.php">Jouer</a>
                         </li>
@@ -36,7 +63,7 @@
 
         <footer class="container">
             <p class="navbar-text">
-               Technicien Informatique ES 2015 T.IS-E1AB 
+                Technicien Informatique ES 2015 T.IS-E1AB 
             </p>
         </footer>
     </body>
