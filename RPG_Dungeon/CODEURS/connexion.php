@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Renvoie sur la page index si l'utilisateur est connecté
 if (isset($_SESSION['idUtilisateur'])) {
     header('location: index.php');
     exit;

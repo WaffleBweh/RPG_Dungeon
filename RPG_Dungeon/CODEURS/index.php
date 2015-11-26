@@ -46,7 +46,7 @@ include('../ARCHITECTES/traitement.php');
                             <li>
                                 <a href="inscription.php">Inscription</a>
                             </li>
-
+                            
                             <?php
                         }
                         ?>
