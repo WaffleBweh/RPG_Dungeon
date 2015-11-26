@@ -67,15 +67,11 @@ function dungeon(width, height) {
         var controllerX = Math.abs(Math.round(Math.random() * width - 1));
         var controllerY = Math.abs(Math.round(Math.random() * height - 1));
         var randomDirection = 0; // 0 = NORTH, 1 = EAST, 2 = SOUTH, 3 = WEST
-        var canDig = false;
         var randomWallArray = [];
         randomWallArray[0] = 0;
         randomWallArray[1] = 0;
 
-        //bug random possible (sort de l'array)
-
         this.grid[controllerY][controllerX] = 2;
-        visitedCells[controllerY][controllerX] = 1;
         //On ajoute les murs adjacent de la cellule dans un tableau
         if (controllerY < height - 1) {
             if (this.grid[controllerY + 1][controllerX] === 1) {
@@ -95,21 +91,19 @@ function dungeon(width, height) {
         if (controllerX > 0) {
             if (this.grid[controllerY][controllerX - 1] === 1) {
                 wallsGrid[controllerY][controllerX - 1] = 1;
-
             }
         }
         var i;
+        
         // Tant qu'il y a des murs dans l'array
         while (this.isFilled(wallsGrid)) {
             //Break out after 500 runs to prevent infinte looping while debugging
             i++;
-            if (i > 500) {
+            if (i > 20) {
                 break;
             }
+
             randomWallArray = this.returnRandomWall(wallsGrid, width - 1, height - 1);
-
-
-            
 
             // On récupère les coordonées du mur
             controllerX = randomWallArray[0];
@@ -117,80 +111,55 @@ function dungeon(width, height) {
             // On prends une direction aléatoire
             randomDirection = Math.round(Math.random() * 4);
 
-            // On regarde si il est possible de creuser a coté du mur à retirer
-            canDig = false;
+            // On creuse du mur vers une cellule adgacent qui fait partie du labyrinthe
             switch (randomDirection) {
-                // Pour la direction selectionnée, on verifie si la cellule à deja étée visitée
-                //NORD
-                case 0:
-                    if (controllerY > 0) {
-                        if (visitedCells[controllerY - 1][controllerX] !== 1) {
-                            canDig = true;
-                            visitedCells[controllerY - 1][controllerX] = 1;
-                        }
-                    }
-                    break;
-                    //EST
-                case 1:
-                    if (controllerX < width - 1) {
-                        if (visitedCells[controllerY][controllerX + 1] !== 1) {
-                            canDig = true;
-                            visitedCells[controllerY][controllerX + 1] = 1;
-                        }
-                    }
-                    break;
-                    //SUD
-                case 2:
-                    if (controllerY < height - 1) {
-                        if (visitedCells[controllerY + 1][controllerX] !== 1) {
-                            canDig = true;
-                            visitedCells[controllerY + 1][controllerX] = 1;
-                        }
-                    }
-                    break;
-                    //OUEST
-                case 3:
-                    if (controllerX > 0) {
-                        if (visitedCells[controllerY][controllerX - 1] !== 1) {
-                            canDig = true;
-                            visitedCells[controllerY][controllerX - 1] = 1;
-                        }
-                    }
-                    break;
-                default:
-                    canDig = false;
-
-            }
-
-            //Si on peut creuser la cellule...
-            if (canDig) {
-                // On creuse et marque la cellule comme visitée
-                this.grid[controllerY][controllerX] = 0;
-
-                // On ajoute les murs a la liste
-                if (controllerY < height - 1) {
+                // Nord
+                case 0 :
                     if (this.grid[controllerY + 1][controllerX] === 1) {
-                        wallsGrid[controllerY + 1][controllerX] = 1;
+                        this.grid[controllerY][controllerY] = 0;
                     }
-                }
-                if (controllerY > 0) {
-                    if (this.grid[controllerY - 1][controllerX] === 1) {
-                        wallsGrid[controllerY - 1][controllerX] = 1;
-                    }
-                }
-                if (controllerX < width - 1) {
-                    if (this.grid[controllerY][controllerX + 1] === 1) {
-                        wallsGrid[controllerY][controllerX + 1] = 1;
-                    }
-                }
-                if (controllerX > 0) {
+                    break;
+                    // Est
+                case 1 :
                     if (this.grid[controllerY][controllerX - 1] === 1) {
-                        wallsGrid[controllerY][controllerX - 1] = 1;
+                        this.grid[controllerY][controllerY] = 0;
                     }
+                    break;
+                    // Sud
+                case 2 :
+                    if (this.grid[controllerY - 1][controllerX] === 1) {
+                        this.grid[controllerY][controllerY] = 0;
+                    }
+                    break;
+                    // Ouest
+                case 3 :
+                    if (this.grid[controllerY][controllerX + 1] === 1) {
+                        this.grid[controllerY][controllerY] = 0;
+                    }
+                    break;
+            }
+            // On marque les murs de la cellule creusée
+            if (controllerY < height - 1) {
+                if (this.grid[controllerY + 1][controllerX] === 1) {
+                    wallsGrid[controllerY + 1][controllerX] = 1;
                 }
             }
-            
-            //We remove the wall from the list
+            if (controllerY > 0) {
+                if (this.grid[controllerY - 1][controllerX] === 1) {
+                    wallsGrid[controllerY - 1][controllerX] = 1;
+                }
+            }
+            if (controllerX < width - 1) {
+                if (this.grid[controllerY][controllerX + 1] === 1) {
+                    wallsGrid[controllerY][controllerX + 1] = 1;
+                }
+            }
+            if (controllerX > 0) {
+                if (this.grid[controllerY][controllerX - 1] === 1) {
+                    wallsGrid[controllerY][controllerX - 1] = 1;
+                }
+            }
+            // On retire le mur du tableau
             wallsGrid[controllerY][controllerY] = 0;
         }
         console.log(wallsGrid);
@@ -212,7 +181,7 @@ function dungeon(width, height) {
         sprPlayer.src = "img/player.png";
 
         setTimeout(function() {
-            // Draws the overhead map
+            // Dessine la vue du labyrinthe
             for (i = 0; i < height; i++) {
                 for (j = 0; j < width; j++) {
                     if (currentGrid[i][j] === 0) {
@@ -226,7 +195,7 @@ function dungeon(width, height) {
                     }
                 }
             }
-        }, 200);
+        }, 500);
     };
 }
 
