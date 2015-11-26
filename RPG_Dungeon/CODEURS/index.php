@@ -17,7 +17,7 @@ include('../ARCHITECTES/traitement.php');
         <header class="container page-header">
             <img class="img-responsive col-sm-10 col-sm-offset-1" src="./IMG/logo dungeon.png">
         </header>
-        <section>
+        <section>      
             <div class="container contenu">
 
                 <div class="modal-header col-sm-6 col-sm-offset-3">
@@ -56,6 +56,11 @@ include('../ARCHITECTES/traitement.php');
                         </li>
                         <li>
                             <a href="credits.php">Crédits</a>
+                        </li>
+                        <li>
+                            <script type="text/javascript" src="http://counter7.fcs.ovh/private/countertab.js?c=e3b069bb45f5ffcab1e97a15c1464a8a"></script>
+                            <noscript><a href="http://www.compteurdevisite.com" title="compteur"><img src="http://counter7.fcs.ovh/private/compteurdevisite.php?c=e3b069bb45f5ffcab1e97a15c1464a8a" border="0" title="compteur" alt="compteur"></a>
+                            </noscript>
                         </li>
                     </ul>
                 </div>
