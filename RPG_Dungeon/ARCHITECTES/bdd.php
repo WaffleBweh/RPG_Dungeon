@@ -26,7 +26,7 @@ function connexionDb() {
     if ($pdo === NULL) {
         // Connexion à la base.
         $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-
+        $pdo_options[PDO::ATTR_PERSISTENT] = true;
 
         $pdo = new PDO("mysql:host=$serveur;dbname=$db", $pseudo, $pwd, $pdo_options);
         $pdo->exec("Set Character set UTF8");
