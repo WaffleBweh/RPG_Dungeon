@@ -7,7 +7,7 @@
  * Description : Fichier contenant les fonctions qui traitent les résultats de la base de données
  */
 
-//include_once './bdd.php';
+include_once '../ARCHITECTES/bdd.php';
 
 /**
  * Récupère tout le donjon sous la forme d'un tableau à deux dimensions

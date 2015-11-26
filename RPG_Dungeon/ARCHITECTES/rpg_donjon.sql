@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 19 Novembre 2015 à 13:14
+-- Généré le :  Jeu 26 Novembre 2015 à 15:44
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `rpg_donjon`
 --
+CREATE DATABASE IF NOT EXISTS `rpg_donjon` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `rpg_donjon`;
 
 -- --------------------------------------------------------
@@ -46,7 +47,7 @@ DROP TABLE IF EXISTS `plateformes`;
 CREATE TABLE IF NOT EXISTS `plateformes` (
   `x` int(11) NOT NULL,
   `y` int(11) NOT NULL,
-  `Direction` enum('NORD','EST','SUD','OUEST') NOT NULL,
+  `Direction` enum('NORD','EST','SUD','OUEST') DEFAULT NULL,
   `idReference` int(11) NOT NULL,
   PRIMARY KEY (`x`,`y`),
   KEY `idReference` (`idReference`)
@@ -57,42 +58,41 @@ CREATE TABLE IF NOT EXISTS `plateformes` (
 --
 
 INSERT INTO `plateformes` (`x`, `y`, `Direction`, `idReference`) VALUES
-(0, 0, '', 2),
-(0, 1, '', 2),
-(0, 2, '', 2),
-(0, 3, '', 2),
-(0, 4, '', 2),
-(0, 5, '', 2),
-(1, 0, '', 2),
-(1, 1, '', 1),
-(1, 2, '', 1),
-(1, 3, '', 1),
-(1, 4, '', 2),
-(1, 5, '', 2),
-(2, 0, '', 2),
-(2, 1, '', 2),
-(2, 2, '', 2),
-(2, 3, '', 1),
-(2, 4, '', 2),
-(2, 5, '', 2),
-(3, 0, '', 2),
-(3, 1, '', 1),
-(3, 2, '', 2),
-(3, 3, '', 3),
-(3, 4, '', 1),
-(3, 5, '', 2),
-(4, 0, '', 2),
-(4, 1, '', 1),
-(4, 2, '', 1),
-(4, 3, '', 1),
-(4, 4, '', 1),
-(4, 5, '', 2),
-(5, 0, '', 2),
-(5, 1, '', 2),
-(5, 2, '', 2),
-(5, 3, '', 2),
-(5, 4, '', 2),
-(5, 5, '', 2);
+(0, 0, 'SUD', 3),
+(0, 1, NULL, 1),
+(0, 2, NULL, 1),
+(0, 3, NULL, 1),
+(0, 4, NULL, 1),
+(0, 5, NULL, 1),
+(1, 0, NULL, 1),
+(1, 1, NULL, 1),
+(1, 2, NULL, 1),
+(1, 3, NULL, 1),
+(1, 4, NULL, 1),
+(1, 5, NULL, 1),
+(2, 0, NULL, 1),
+(2, 1, NULL, 1),
+(2, 2, NULL, 1),
+(2, 3, NULL, 1),
+(2, 4, NULL, 1),
+(2, 5, NULL, 1),
+(3, 0, NULL, 1),
+(3, 1, NULL, 1),
+(3, 2, NULL, 1),
+(3, 3, NULL, 1),
+(3, 4, NULL, 1),
+(3, 5, NULL, 1),
+(4, 0, NULL, 1),
+(4, 1, NULL, 1),
+(4, 2, NULL, 1),
+(4, 3, NULL, 1),
+(4, 4, NULL, 1),
+(5, 0, NULL, 1),
+(5, 1, NULL, 1),
+(5, 2, NULL, 1),
+(5, 3, NULL, 1),
+(5, 4, NULL, 1),
+(5, 5, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -162,8 +162,8 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 -- Contraintes pour la table `associertexture`
 --
 ALTER TABLE `associertexture`
-  ADD CONSTRAINT `associertexture_ibfk_2` FOREIGN KEY (`idReference`) REFERENCES `references` (`idReference`),
-  ADD CONSTRAINT `associertexture_ibfk_1` FOREIGN KEY (`idTexture`) REFERENCES `textures` (`idTexture`);
+  ADD CONSTRAINT `associertexture_ibfk_1` FOREIGN KEY (`idTexture`) REFERENCES `textures` (`idTexture`),
+  ADD CONSTRAINT `associertexture_ibfk_2` FOREIGN KEY (`idReference`) REFERENCES `references` (`idReference`);
 
 --
 -- Contraintes pour la table `plateformes`

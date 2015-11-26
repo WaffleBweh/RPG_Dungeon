@@ -160,12 +160,21 @@ function RecupereDonjonDB() {
     return $st;
 }
 
+function RecupereDirectionJoueur() {
+    global $pdo;
+
+    $query = "SELECT Direction FROM plateformes WHERE idReference=3";
+    $st = PrepareExecute($query)->FetchAll();
+
+    return $st;
+}
+
 /**
  * Mise à jour du donjon
  * @global pdo $pdo
  * @param array $carte Tableau de la carte a sauver 
  */
-function MajDonjon($carte) {
+function MajDonjon($carte,$direction) {
     global $pdo;
     $indice1 = 0;
     EffaceDonjon();
@@ -174,7 +183,11 @@ function MajDonjon($carte) {
         foreach ($ligne as $case) {
 
             $query = "INSERT INTO plateformes(x, y, Direction, idReference) VALUES (:indice1,:indice2,:direction,:ref)";
-            $params = array("indice1" => $indice1, "indice2" => $indice2, "direction" => NULL, ":ref" => $case + 1);
+            if($case == 2){
+              $params = array("indice1" => $indice1, "indice2" => $indice2, "direction" => $direction, ":ref" => $case + 1);
+            }else{
+              $params = array("indice1" => $indice1, "indice2" => $indice2, "direction" => NULL, ":ref" => $case + 1);    
+            }
             PrepareExecute($query, $params);
             $indice2++;
         }
