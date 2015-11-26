@@ -15,6 +15,106 @@ and open the template in the editor.
         <script src="./niveau.js"></script>
     </head>
     <body>
-        <div>TEST write content</div>
+        <div>
+            <canvas id="canvas" width="800" height="800" style="border:1px solid #000000"></canvas>
+            <script>
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+
+                var niveau1 = new niveau();
+                var joueur1 = new joueur();
+
+                for (var x = 0; x < this.niveau1.carte[0].length; x++) {
+                    for (var y = 0; y < this.niveau1.carte.length; y++) {
+                        if (niveau1.carte[y][x] === 2) {
+                            this.joueur1.joueurX = x;
+                            this.joueur1.joueurY = y;
+                        }
+
+                    }
+                }
+
+                InitialisationTableauVue("EST");
+
+                function InitialisationTableauVue(direction) {
+                    //switch direction
+                    var yVueJoueur = 4;
+                    switch (direction) {
+                        case "NORD":
+                            //création du tableau selon direction
+                            for (var y = this.joueur1.distanceVue; y >= 0; y--) {
+                                if (this.joueur1.joueurY < this.niveau1.carte.length) {
+                                    if (this.joueur1.joueurY - y > 0) {
+                                        if (this.joueur1.joueurX < this.niveau1.carte[0].length) {
+                                            if (this.joueur1.joueurX > 0) {
+                                                this.joueur1.vueJoueur[yVueJoueur][0] = this.niveau1.carte[this.joueur1.joueurY - y][this.joueur1.joueurX - 2];
+                                                this.joueur1.vueJoueur[yVueJoueur][1] = this.niveau1.carte[this.joueur1.joueurY - y][this.joueur1.joueurX - 1];
+                                                this.joueur1.vueJoueur[yVueJoueur][2] = this.niveau1.carte[this.joueur1.joueurY - y][this.joueur1.joueurX];
+                                                this.joueur1.vueJoueur[yVueJoueur][3] = this.niveau1.carte[this.joueur1.joueurY - y][this.joueur1.joueurX + 1];
+                                                this.joueur1.vueJoueur[yVueJoueur][4] = this.niveau1.carte[this.joueur1.joueurY - y][this.joueur1.joueurX + 2];
+                                            }
+                                        }
+                                    }
+                                }
+                                yVueJoueur--;
+                            }
+                            console.log(this.joueur1.vueJoueur);
+                            break;
+                        case "SUD":
+                            //création du tableau selon direction
+                            for (var y = this.joueur1.distanceVue; y >= 0; y--) {
+                                if (this.joueur1.joueurY + y < this.niveau1.carte.length) {
+                                    if (this.joueur1.joueurY > 0) {
+                                        if (this.joueur1.joueurX < this.niveau1.carte[0].length) {
+                                            if (this.joueur1.joueurX > 0) {
+                                                this.joueur1.vueJoueur[yVueJoueur][0] = this.niveau1.carte[this.joueur1.joueurY + y][this.joueur1.joueurX - 2];
+                                                this.joueur1.vueJoueur[yVueJoueur][1] = this.niveau1.carte[this.joueur1.joueurY + y][this.joueur1.joueurX - 1];
+                                                this.joueur1.vueJoueur[yVueJoueur][2] = this.niveau1.carte[this.joueur1.joueurY + y][this.joueur1.joueurX];
+                                                this.joueur1.vueJoueur[yVueJoueur][3] = this.niveau1.carte[this.joueur1.joueurY + y][this.joueur1.joueurX + 1];
+                                                this.joueur1.vueJoueur[yVueJoueur][4] = this.niveau1.carte[this.joueur1.joueurY + y][this.joueur1.joueurX + 2];
+                                            }
+                                        }
+                                    }
+                                }
+                                yVueJoueur--;
+                            }
+                            console.log(this.joueur1.vueJoueur);
+                            break;
+                            
+                            /* A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                             * probleme dans les if*/
+                        case "EST":
+                            //création du tableau selon direction
+                            for (var y = this.joueur1.distanceVue; y >= 0; y--) {
+                                console.log(this.joueur1.joueurX + y);
+                                if (this.joueur1.joueurY < this.niveau1.carte.length) {
+                                    if (this.joueur1.joueurY > 0) {
+                                        if (this.joueur1.joueurX + y < this.niveau1.carte[0].length) {
+                                            if (this.joueur1.joueurX > 0) {
+                                                this.joueur1.vueJoueur[yVueJoueur][0] = this.niveau1.carte[this.joueur1.joueurY - 2][this.joueur1.joueurX + y];
+                                                this.joueur1.vueJoueur[yVueJoueur][1] = this.niveau1.carte[this.joueur1.joueurY - 1][this.joueur1.joueurX + y];
+                                                this.joueur1.vueJoueur[yVueJoueur][2] = this.niveau1.carte[this.joueur1.joueurY][this.joueur1.joueurX + y];
+                                                this.joueur1.vueJoueur[yVueJoueur][3] = this.niveau1.carte[this.joueur1.joueurY + 1][this.joueur1.joueurX + y];
+                                                this.joueur1.vueJoueur[yVueJoueur][4] = this.niveau1.carte[this.joueur1.joueurY + 2][this.joueur1.joueurX + y];
+                                            }
+                                        }
+                                    }
+                                }
+                                yVueJoueur--;
+                            }
+                            console.log(this.joueur1.vueJoueur);
+                            break;
+                        case "OUEST":
+                            //création du tableau selon direction
+                            break;
+                    }
+                }
+
+                this.joueur1.creationDeLaVue(canvas, ctx);
+
+                /*console.log(niveau1.carte);
+                 console.log(joueur1.direction);*/
+            </script>
+        </div>
     </body>
 </html>
