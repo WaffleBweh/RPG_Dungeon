@@ -31,6 +31,9 @@ include('../ARCHITECTES/traitement.php');
                             if ($_SESSION['idUtilisateur'] != "" || $_SESSION['Pseudo'] != "") {
                                 ?>
                                 <li>
+                                    <a href="jouer.php">Jouer</a>
+                                </li>
+                                <li>
                                     <a href="deconnexion.php">Déconnexion</a>
                                 </li>
                                 <?php
@@ -47,9 +50,7 @@ include('../ARCHITECTES/traitement.php');
                             <?php
                         }
                         ?>
-                        <li>
-                            <a href="jouer.php">Jouer</a>
-                        </li>
+
                         <li>
                             <a href="informations.php">Informations</a>
                         </li>

@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (isset($_SESSION['idUtilisateur'])) {
+    header('location: index.php');
+    exit;
+}
 include('../ARCHITECTES/bdd.php');
 include('../ARCHITECTES/traitement.php');
 $erreurConnexion = '';
@@ -12,16 +16,16 @@ if (isset($_POST['BoutonConnexion'])) {
             connexionDb();
             /* on crypte le mot de passe pour faire le test */
             $passhache = sha1($_POST['MotDePasse']);
-            /* on verifie qu'un membre a bien ce pseudo et ce mot de passe */           
-            $resultat=ConnectJoueur($_POST['Pseudo'], $passhache);
+            /* on verifie qu'un membre a bien ce pseudo et ce mot de passe */
+            $resultat = ConnectJoueur($_POST['Pseudo'], $passhache);
             /* s'il n'y a pas de resultat, on renvoie a la page de connexion */
-            if ($resultat == '') {
+            if ($resultat == 'erreur') {
                 $erreurConnexion = 'Identifiants incorrecte';
             } else {
 
 
                 /* on cree les variables de session du client qui lui serviront pendant sa session */
-                $_SESSION['idUtilisateur'] = $resultat['idUtilisateur'];
+                $_SESSION['idUtilisateur'] = $resultat;
 
 
                 /* on renvoie sur la page d'accueil */
@@ -44,7 +48,9 @@ if (isset($_POST['BoutonConnexion'])) {
         <link href="./script/css/bootstrap.min.css" rel="stylesheet">
         <link href="./script/css/style.css" rel="stylesheet">
         <link href="./script/css/loginStyle.css" rel="stylesheet">
-
+        <script src="script/js/jquery.js"></script>
+        <script src="./script/js/bootstrap.min.js"></script>
+        <script src="./script/js/bootstrap.js"></script>
     </head>
     <body>
         <header class="container page-header">
@@ -55,13 +61,20 @@ if (isset($_POST['BoutonConnexion'])) {
 
                 <div class="modal-header col-sm-6 col-sm-offset-3">
                     <h1 class="text-center">Connexion</h1>
-                    <?php
-                    if (empty($_SESSION['IdUtilisateur'])) { //les membres connectes ne peuvent pas se reconnecter
-                        ?>
+                  
                     </div>
                     <div class="modal-body col-sm-6 col-sm-offset-3">
                         <div class = "container col-sm-10 col-sm-offset-1">
-
+                            <?php
+                            if (!empty($erreurConnexion)) {
+                                ?>
+                                <div class="alert alert-danger fade in">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong>Erreur! </strong><?php echo $erreurConnexion; ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <form action="#" method="post" name="Login_Form" class="form-signin">       
                                 <h3 class="form-signin-heading">Bienvenue!</h3>
                                 <hr class="colorgraph"><br>
@@ -69,19 +82,10 @@ if (isset($_POST['BoutonConnexion'])) {
                                 <input type="text" class="form-control" name="Pseudo" placeholder="Pseudo" required="" autofocus="" />
                                 <input type="password" class="form-control" name="MotDePasse" placeholder="Mot de passe" required=""/>     		  
 
-                                <button class="btn btn-lg btn-primary btn-block"  name="BoutonConnexion" value="Connexion" type="Submit">Connexion</button>  			
+                                <button class="btn btn-lg btn-primary btn-block"  name="BoutonConnexion" value="Connexion" type="Submit">Connexion</button>  	
+                                </br></br><a href="index.php" class="btn btn-block btn-lg btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
                             </form>		
-                            <?php
-                        } else {
-                            $erreurConnexion = 'Vous êtes déjà connecté!';
-                        }
-                        if ($erreurConnexion == 'Merci de votre inscription') {
-                            echo '<span class="GrasVert">' . $erreurConnexion . '</span>';
-                        } else {
-                            echo '<span class="GrasRouge">' . $erreurConnexion . '</span>';
-                        }
-                        ?>
-
+                            
                     </div>
                 </div>
 
